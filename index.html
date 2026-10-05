@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Voter Awareness Portal of India</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        /* HEADER */
+        header {
+            background: white;
+            border-bottom: 4px solid #138808;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 7%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 42px;
+        }
+
+        .logo h1 {
+            color: #1b3c73;
+            font-size: 22px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        nav a {
+            text-decoration: none;
+            margin-left: 20px;
+            color: #222;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #138808;
+        }
+
+        /* FLAG */
+        .flag {
+            height: 9px;
+            background: linear-gradient(
+                to bottom,
+                #ff9933 33%,
+                white 33%,
+                white 66%,
+                #138808 66%
+            );
+        }
+
+        .ashoka-emblem {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 25px;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.25));
+            background: linear-gradient(to bottom, #ff9933 0 33%, #ffffff 33% 66%, #138808 66% 100%);
+            -webkit-mask: url("https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg") center/contain no-repeat;
+            mask: url("https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg") center/contain no-repeat;
+        }
+        /* ECI LOGO — ADJACENT TO SITE TITLE */
+        .eci-top-left {
+            width: 58px;
+            height: 58px;
+            flex: 0 0 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        .eci-top-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .eci-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        @media(max-width:700px) {
+            .eci-top-left {
+                width: 48px;
+                height: 48px;
+                flex-basis: 48px;
+                padding: 0;
+            }
+        }
+
+
+        /* HERO */
+        .hero {
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+
+            background:
+                linear-gradient(
+                    rgba(0, 32, 70, 0.75),
+                    rgba(0, 32, 70, 0.75)
+                ),
+                url("https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            background: #ff9933;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .btn.green {
+            background: #138808;
+        }
+
+        .btn.blue {
+            background: #1b3c73;
+        }
+        
+        .btn.red {
+            background: #d32f2f;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 60px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #1b3c73;
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 750px;
+            margin: auto;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        /* CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+        }
+
+        .card-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #1b3c73;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* ENHANCED SERVICES CSS */
+        .services {
+            background: #eef4f8;
+        }
+        .service-container { max-width: 1100px; margin: auto; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .form-card { background: white; border: 1px solid #e1e6ed; border-radius: 12px; padding: 25px; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        .form-card:hover { border-color: #ff9933; transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+        .form-badge { position: absolute; top: 0; right: 0; background: #1b3c73; color: white; font-weight: bold; padding: 6px 15px; border-bottom-left-radius: 12px; font-size: 13px; letter-spacing: 1px; }
+        .form-badge.orange { background: #ff9933; }
+        .form-badge.green { background: #138808; }
+        .form-card h3 { color: #1b3c73; margin-top: 15px; margin-bottom: 10px; font-size: 19px; }
+        .form-card p { color: #555; line-height: 1.5; margin-bottom: 15px; font-size: 14px; flex-grow: 1;}
+        .form-features { list-style: none; margin-bottom: 20px; flex-grow: 2;}
+        .form-features li { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 13px; color: #444; }
+        .form-features li::before { content: "✓"; color: #138808; font-weight: bold; }
+        .doc-req { background: white; padding: 35px; border-radius: 16px; border: 1px solid #dfe6ee; box-shadow: 0 5px 20px rgba(0,0,0,0.04); }
+        .doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 25px; }
+        .doc-box { background: #f8fafc; padding: 20px; border-radius: 10px; border-left: 4px solid #138808; }
+        .doc-box h4 { margin-bottom: 10px; color: #1b3c73; font-size: 16px;}
+        .doc-box p { font-size: 14px; color: #555; line-height: 1.5;}
+
+        /* ALERT */
+        .notice {
+            background: #fff3cd;
+            border-left: 6px solid #ff9933;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 30px;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #172b4d;
+            color: white;
+            padding: 40px 7%;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        footer h3 {
+            margin-bottom: 15px;
+        }
+
+        footer p,
+        footer a {
+            color: #ddd;
+            line-height: 1.8;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #52627a;
+            margin-top: 30px;
+            padding-top: 20px;
+        }
+
+        /* ENHANCED GUIDE */
+        .enhanced-guide { background:linear-gradient(180deg,#f8fafc 0%,#eef4f8 100%); }
+        .guide-head { text-align:center; max-width:900px; margin:auto; }
+        .eyebrow,.checklist-label,.quick-title { display:inline-block;font-size:12px;font-weight:800;letter-spacing:1.5px;color:#138808;margin-bottom:10px; }
+        .guide-tabs { display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:30px auto 24px; }
+        .guide-tab { border:1px solid #d6dde7;background:#fff;color:#1b3c73;padding:13px 17px;border-radius:999px;font-weight:700;cursor:pointer;transition:.25s; }
+        .guide-tab:hover,.guide-tab.active { background:#1b3c73;color:#fff;transform:translateY(-2px); }
+        .guide-panel { display:none;animation:fadeGuide .3s ease; }
+        .active-panel { display:block; }
+        @keyframes fadeGuide { from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)} }
+        .journey-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:18px; }
+        .journey-card,.after-card,.concept-card { background:#fff;border:1px solid #e3e8ef;border-radius:16px;padding:24px;box-shadow:0 8px 25px rgba(0,0,0,.06); }
+        .journey-icon { font-size:36px;margin-bottom:14px; }
+        .journey-card h3,.after-card h3 { color:#1b3c73;margin-bottom:10px; }
+        .journey-card p,.after-card p,.concept-card p { color:#667085;line-height:1.6; }
+        .mini-btn { display:inline-block;margin-top:15px;padding:9px 13px;border-radius:7px;background:#138808;color:#fff;text-decoration:none;font-size:13px;font-weight:700; }
+        .checklist-box { margin-top:22px;padding:24px;border-radius:16px;background:#fff;border:1px solid #dfe6ee;display:grid;grid-template-columns:.8fr 1.2fr;gap:20px; }
+        .checklist-box h3 { color:#1b3c73; }
+        .check-items { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+        .check-items label { background:#f6f8fb;padding:12px;border-radius:9px;color:#344054; }
+        .check-items input { margin-right:8px;accent-color:#138808; }
+        .booth-flow { max-width:850px;margin:auto; }
+        .flow-step { display:flex;align-items:flex-start;gap:18px;background:#fff;border:1px solid #e0e6ed;border-radius:15px;padding:20px;box-shadow:0 5px 18px rgba(0,0,0,.05); }
+        .flow-step>span { min-width:48px;height:48px;border-radius:50%;background:#ff9933;color:#fff;display:grid;place-items:center;font-weight:800; }
+        .flow-step h3 { color:#1b3c73;margin-bottom:6px; }
+        .flow-step p { color:#667085;line-height:1.55; }
+        .flow-step.highlight { border:2px solid #138808; }
+        .flow-arrow { text-align:center;font-size:26px;color:#138808;padding:5px; }
+        .info-strip { margin:25px auto 0;max-width:850px;padding:16px 20px;background:#e8f5e9;border-radius:10px;color:#215b27; }
+        
+        /* REALISTIC EVM & VVPAT DEMO STYLES */
+        .evm-layout { display:grid;grid-template-columns:1.15fr 0.85fr;gap:25px;align-items:start;margin-bottom:25px; }
+        .evm-card { background:#1a2332; border: 4px solid #2c3e50; padding:24px; border-radius:12px; color:#fff; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .evm-title { font-weight:800;letter-spacing:1px;margin-bottom:15px; display:flex; align-items:center; }
+        .status-dot { display:inline-block;width:12px;height:12px;background:#40c463;border-radius:50%;margin-right:8px; box-shadow: 0 0 5px #40c463; }
+        
+        .evm-machine { background:#e8edf2; color:#000; border-radius:4px; overflow:hidden; padding:10px; border: 2px solid #bdc3c7; }
+        .machine-label { font-size:11px;font-weight:800;color:#555;padding:7px; display: flex; justify-content: space-between; border-bottom: 2px solid #bdc3c7; margin-bottom: 5px;}
+        
+        /* Realistic Ballot Row */
+        .candidate-row { display:flex; align-items:center; padding:10px 8px; border-bottom:1px solid #cfd9e0; background: #fff; margin-bottom: 3px; }
+        .serial-no { font-weight: bold; width: 25px; color: #444; font-size: 15px;}
+        .candidate-name { flex-grow: 1; font-weight: bold; font-size: 14px; color: #111; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        /* High Definition Symbol Styling */
+        .party-symbol-box {
+            width: 76px;
+            height: 58px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #cfd6df;
+            border-radius: 8px;
+            margin-right: 15px;
+            padding: 6px;
+            background: linear-gradient(145deg,#ffffff,#f1f4f7);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 2px 5px rgba(0,0,0,.10);
+            overflow: hidden;
+        }
+        .party-symbol-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,.16));
+            transition: transform .2s ease, filter .2s ease;
+        }
+        .party-symbol-box:hover .party-symbol-img {
+            transform: scale(1.08);
+            filter: drop-shadow(0 3px 4px rgba(0,0,0,.22));
+        }
+        
+        /* Realistic Blue Button & Red LED */
+        .evm-controls { display: flex; align-items: center; gap: 15px; }
+        .evm-led { width: 14px; height: 14px; background: #555; border-radius: 50%; border: 2px solid #222; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); }
+        .evm-led.on { background: #ff2a2a; box-shadow: 0 0 10px #ff2a2a, inset 0 2px 4px rgba(255,255,255,0.4); }
+        .evm-btn { border:none; background:#1b3c73; width: 48px; height: 26px; border-radius:13px; cursor:pointer; box-shadow: 0 4px 0 #0d1e3a, inset 0 2px 4px rgba(255,255,255,0.3); transition: 0.1s; position: relative;}
+        .evm-btn:active { transform: translateY(4px); box-shadow: 0 0 0 #0d1e3a, inset 0 2px 4px rgba(0,0,0,0.4); }
+        .evm-btn:disabled { background: #5a6e8e; box-shadow: 0 4px 0 #3a4b66; cursor: not-allowed; }
+        .evm-btn:disabled:active { transform: none; box-shadow: 0 4px 0 #3a4b66; }
+        
+        /* VVPAT SPECIFIC */
+        .vvpat-machine { background:#2a364a;border-radius:4px;overflow:hidden;padding:12px; display:flex; flex-direction:column; align-items:center; height: 100%; min-height: 330px; border: 2px solid #4a5c75;}
+        .vvpat-window { width: 170px; height: 220px; background: #000; border: 8px solid #5a6d85; border-radius: 8px; position: relative; overflow: hidden; margin-top: 10px; display:flex; justify-content:center; align-items:center; box-shadow: inset 0 0 20px rgba(0,0,0,1);}
+        .vvpat-slip { width: 125px; height: 155px; background: #fdfdfd; position: absolute; top: -180px; border: 1px dashed #999; box-shadow: 0 0 10px rgba(255,255,255,0.25); transition: top 0.5s ease-in-out, opacity 0.5s ease; opacity: 0; display: flex; justify-content: center; align-items: center; padding: 10px;}
+        .vvpat-slip.printing { top: 32px; opacity: 1; }
+        .vvpat-slip.dropping { top: 240px; opacity: 0; }
+        
+        /* Thermal Printer Effect for VVPAT */
+        .slip-symbol-img { width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%) contrast(1.5) brightness(0.85); mix-blend-mode: multiply; }
+        
+        .demo-note { font-size:12px;opacity:.75;margin-top:12px; text-align: center;}
+        
+        .concept-grid { display:grid;grid-template-columns:1fr 1fr;gap:15px; }
+        .concept-card b { color:#1b3c73;display:block;margin-bottom:8px;font-size:17px; }
+        .after-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:18px; }
+        .big-icon { font-size:35px;display:block;margin-bottom:10px; }
+        .myth-box { margin-top:22px;background:#fff;border-radius:16px;padding:24px;border:1px solid #e1e6ed; }
+        .myth-title { font-weight:800;letter-spacing:1px;color:#1b3c73;margin-bottom:15px; }
+        .myth-row { display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid #edf0f3; }
+        .myth-row p { color:#475467;line-height:1.5; }
+        .myth-tag,.fact-tag { font-size:11px;font-weight:800;padding:5px 8px;border-radius:5px; }
+        .myth-tag { background:#fee4e2;color:#b42318; }
+        .fact-tag { background:#dcfae6;color:#067647; }
+        .quick-knowledge { margin-top:25px;background:#fff;border-radius:18px;padding:26px;border:1px solid #dfe6ee;text-align:center; }
+        .quick-knowledge h3 { color:#1b3c73;margin-bottom:18px; }
+        .quiz-options { display:flex;gap:10px;justify-content:center;flex-wrap:wrap; }
+        .quiz-options button { padding:11px 15px;border-radius:8px;border:1px solid #d6dde7;background:#f8fafc;cursor:pointer;font-weight:600; }
+        .quiz-options button:hover { border-color:#138808; }
+        .quiz-result { min-height:24px;margin-top:14px;font-weight:800; }
+
+
+        /* CONSTITUTION & VOTING RIGHTS */
+        .constitution-section{background:linear-gradient(180deg,#fff 0%,#f1f6fa 100%)}
+        .constitution-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:30px;align-items:stretch;max-width:1100px;margin:35px auto 0}
+        .constitution-image-card,.rights-card{background:#fff;border:1px solid #dfe6ee;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,.07)}
+        .constitution-image-wrap{height:100%;min-height:430px;background:#172b4d;display:flex;align-items:center;justify-content:center;padding:22px}
+        .constitution-image{width:100%;height:100%;max-height:520px;object-fit:cover;object-position:center;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.25)}
+        .image-caption{padding:14px 18px;color:#667085;font-size:12px;line-height:1.5;background:#fff}
+        .rights-card{padding:30px}.rights-kicker{display:inline-block;font-size:12px;font-weight:800;letter-spacing:1.4px;color:#138808;margin-bottom:8px}
+        .rights-card h3{color:#1b3c73;font-size:27px;margin-bottom:14px}
+        .article-highlight{background:linear-gradient(135deg,#fff8ed,#f1f8f1);border-left:5px solid #ff9933;padding:18px;border-radius:10px;margin:18px 0}
+        .article-number{color:#1b3c73;font-size:18px;font-weight:800;margin-bottom:7px}
+        .rights-points{display:grid;gap:12px;margin-top:18px}.rights-point{display:flex;gap:11px;align-items:flex-start;color:#475467;line-height:1.5}
+        .rights-point span:first-child{width:27px;height:27px;flex:0 0 27px;display:grid;place-items:center;border-radius:50%;background:#e8f5e9;color:#138808;font-weight:800}
+        /* EVM IMAGE CARDS */
+        .evm-image-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:25px 0 28px}
+        .evm-image-card{background:#fff;border:1px solid #dfe6ee;border-radius:16px;overflow:hidden;box-shadow:0 7px 20px rgba(0,0,0,.06)}
+        .evm-image-card img{width:100%;height:190px;object-fit:cover;display:block}
+        .evm-image-card div{padding:15px}.evm-image-card h4{color:#1b3c73;margin-bottom:6px}.evm-image-card p{color:#667085;font-size:13px;line-height:1.5}
+
+
+        /* FORM LOGIN MODAL */
+        .form-login-overlay {
+            display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.65);
+            z-index:5000;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+        }
+        .form-login-overlay.show { display:flex; }
+        .form-login-box {
+            width:min(430px,100%);
+            background:#fff;
+            border-radius:18px;
+            overflow:hidden;
+            box-shadow:0 20px 60px rgba(0,0,0,.3);
+            animation:loginPop .22s ease;
+        }
+        @keyframes loginPop {
+            from { opacity:0; transform:translateY(15px) scale(.98); }
+            to { opacity:1; transform:translateY(0) scale(1); }
+        }
+        .form-login-head {
+            background:linear-gradient(135deg,#1b3c73,#16315f);
+            color:#fff;
+            padding:24px;
+        }
+        .form-login-head h3 { margin-bottom:6px; }
+        .form-login-head p { opacity:.9; font-size:13px; line-height:1.5; }
+        .form-login-body { padding:24px; }
+        .form-login-body label {
+            display:block;
+            color:#344054;
+            font-size:13px;
+            font-weight:700;
+            margin:0 0 7px;
+        }
+        .form-login-body input {
+            width:100%;
+            padding:12px 13px;
+            border:1px solid #d0d5dd;
+            border-radius:8px;
+            margin-bottom:16px;
+            outline:none;
+            font-size:14px;
+        }
+        .form-login-body input:focus { border-color:#1b3c73; box-shadow:0 0 0 3px rgba(27,60,115,.1); }
+        .login-actions { display:flex; gap:10px; margin-top:4px; }
+        .login-actions button {
+            flex:1;
+            padding:12px;
+            border-radius:8px;
+            border:0;
+            cursor:pointer;
+            font-weight:700;
+        }
+        .login-submit { background:#138808; color:#fff; }
+        .login-cancel { background:#eef2f6; color:#344054; }
+        .login-error {
+            display:none;
+            background:#fff1f0;
+            color:#b42318;
+            border:1px solid #fecdca;
+            padding:10px;
+            border-radius:8px;
+            margin-bottom:14px;
+            font-size:13px;
+        }
+        .login-note {
+            margin-top:14px;
+            font-size:11px;
+            color:#667085;
+            line-height:1.5;
+        }
+        .application-status {
+            display:none;
+            position:fixed;
+            inset:auto 20px 20px auto;
+            z-index:6000;
+            background:#e8f5e9;
+            color:#215b27;
+            border:1px solid #a5d6a7;
+            border-radius:10px;
+            padding:13px 16px;
+            box-shadow:0 8px 25px rgba(0,0,0,.12);
+            font-size:13px;
+            font-weight:700;
+        }
+
+        /* MOBILE */
+        @media(max-width: 700px) {
+            .topbar { flex-direction: column; gap: 15px; }
+            nav a { margin: 5px; font-size: 13px; }
+            .hero h2 { font-size: 34px; }
+            .hero p { font-size: 17px; }
+            .journey-grid, .after-grid { grid-template-columns:1fr; }
+            .checklist-box, .evm-layout { grid-template-columns:1fr; }
+            .check-items, .concept-grid { grid-template-columns:1fr; }
+            .guide-tabs { justify-content:flex-start; overflow-x:auto; padding-bottom:5px; }
+            .guide-tab { white-space:nowrap; }
+            .party-symbol-box { margin-right: 5px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .constitution-grid, .evm-image-strip { grid-template-columns: 1fr; }
+            .constitution-image-wrap { min-height: 330px; }
+            .evm-image-card img { height: 210px; }
+        }
+    
+
+        /* PROFESSIONAL CONTROL UNIT */
+        .control-unit-wrap { grid-column:1 / -1; display:flex; justify-content:center; margin-top:2px; }
+        .control-unit-card { width:min(760px,100%); }
+        .real-control-unit { background:linear-gradient(145deg,#eef1f3,#b9bec3); border:3px solid #59616a; border-radius:10px; overflow:hidden; color:#17202b; box-shadow:inset 0 0 0 1px #fff, inset 0 -5px 12px rgba(0,0,0,.12), 0 12px 30px rgba(0,0,0,.28); position:relative; }
+        .real-control-unit::before { content:""; position:absolute; inset:7px; border:1px solid rgba(255,255,255,.8); border-radius:6px; pointer-events:none; }
+        .cu-header { position:relative; z-index:1; background:linear-gradient(#3f4852,#202830); color:#fff; padding:13px 16px; display:flex; align-items:center; justify-content:space-between; border-bottom:4px solid #111820; box-shadow:inset 0 1px rgba(255,255,255,.18); }
+        .cu-brand { font-size:13px; font-weight:900; letter-spacing:1.2px; }
+        .cu-brand small { display:block; font-size:8px; opacity:.7; margin-top:3px; letter-spacing:1px; }
+        .cu-indicators { display:flex; gap:18px; font-size:9px; font-weight:900; letter-spacing:.7px; }
+        .cu-indicators span { display:flex; align-items:center; gap:6px; }
+        .cu-indicators i { width:10px; height:10px; border-radius:50%; display:inline-block; border:1px solid #222; box-shadow:inset 0 1px 2px rgba(255,255,255,.35); }
+        .cu-green { background:#28b85a; box-shadow:0 0 7px #28b85a; }
+        .cu-red { background:#b72c2c; }
+        .cu-body { position:relative; z-index:1; display:grid; grid-template-columns:1.35fr .65fr; gap:18px; padding:22px; background:linear-gradient(135deg,#e9ecef,#c3c8cd); }
+        .cu-display { background:linear-gradient(#cfd3d7,#adb3b8); border:2px solid #777f87; padding:13px; border-radius:7px; box-shadow:inset 0 2px 4px rgba(255,255,255,.8),0 2px 5px rgba(0,0,0,.12); }
+        .cu-display-label { font-size:10px; font-weight:900; letter-spacing:1.3px; margin-bottom:8px; color:#303942; display:flex; justify-content:space-between; }
+        .cu-display-label::after { content:"SEALED"; font-size:8px; color:#1f6f3a; border:1px solid #5c9a70; padding:2px 5px; border-radius:3px; }
+        .cu-display-screen { background:radial-gradient(circle at 50% 45%,#263329,#080d0a); border:5px solid #4e565d; border-radius:4px; min-height:145px; color:#70e68a; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; font-family:monospace; box-shadow:inset 0 0 20px rgba(0,0,0,.95),0 2px 4px rgba(0,0,0,.3); }
+        .cu-display-screen span { font-size:11px; letter-spacing:1.5px; color:#9ef3ac; }
+        .cu-display-screen strong { font-size:30px; letter-spacing:3px; text-shadow:0 0 7px rgba(112,230,138,.45); }
+        .cu-display-screen small { font-size:9px; color:#c9d0d5; letter-spacing:.7px; }
+        .cu-panel { background:linear-gradient(#c4c8cc,#aeb3b8); border:2px solid #777e85; border-radius:7px; padding:13px; display:flex; flex-direction:column; justify-content:center; gap:11px; box-shadow:inset 0 2px 4px rgba(255,255,255,.7),0 2px 5px rgba(0,0,0,.12); }
+        .cu-panel-title { font-size:9px; font-weight:900; letter-spacing:1px; color:#3e4650; text-align:center; padding-bottom:4px; border-bottom:1px solid #8d949a; }
+        .cu-key-row { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+        .cu-key-row button { height:44px; border:1px solid #777e85; border-radius:5px; background:linear-gradient(#ffffff,#c9ced2); color:#1b2229; font-size:9px; font-weight:900; letter-spacing:.7px; box-shadow:0 3px 0 #858c92, inset 0 1px 2px rgba(255,255,255,.9); cursor:pointer; }
+        .cu-key-row button:active { transform:translateY(2px); box-shadow:0 1px 0 #858c92; }
+        .cu-key-row button.primary { background:linear-gradient(#3e6fa8,#1b3c73); color:#fff; border-color:#17345f; box-shadow:0 3px 0 #102747; }
+        .cu-bottom-panel { position:relative; z-index:1; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px; padding:10px 16px; background:linear-gradient(#303943,#1f2730); color:#d8dee4; border-top:3px solid #111820; font-size:8px; font-weight:800; letter-spacing:.8px; }
+        .cu-lock { width:34px; height:34px; border-radius:50%; background:linear-gradient(#f7f7f7,#aeb4b9); border:2px solid #707780; display:grid; place-items:center; color:#333; font-size:16px; box-shadow:inset 0 2px 3px rgba(255,255,255,.8),0 2px 3px rgba(0,0,0,.3); }
+        .cu-seal-row { position:relative; z-index:1; background:#161d24; color:#aeb8c1; padding:7px 12px; display:flex; justify-content:space-between; font-size:8px; font-weight:800; letter-spacing:.8px; border-top:1px solid #4a535d; }
+        .cu-header { background:linear-gradient(#3d4650,#252d35); color:#fff; padding:11px 14px; display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid #111820; }
+        .cu-brand { font-size:12px; font-weight:800; letter-spacing:1px; }
+        .cu-indicators { display:flex; gap:16px; font-size:9px; font-weight:800; letter-spacing:.5px; }
+        .cu-indicators span { display:flex; align-items:center; gap:5px; }
+        .cu-indicators i { width:8px; height:8px; border-radius:50%; display:inline-block; border:1px solid #222; }
+        .cu-green { background:#28b85a; box-shadow:0 0 5px #28b85a; }
+        .cu-red { background:#b72c2c; }
+        .cu-body { display:grid; grid-template-columns:1.25fr .75fr; gap:22px; padding:20px; background:linear-gradient(135deg,#e5e8eb,#cbd0d5); }
+        .cu-display { background:#bfc4c8; border:1px solid #8b9299; padding:12px; border-radius:5px; }
+        .cu-display-label { font-size:10px; font-weight:900; letter-spacing:1px; margin-bottom:7px; color:#3e4650; }
+        .cu-display-screen { background:#101418; border:4px solid #59616a; border-radius:3px; min-height:110px; color:#62e07a; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; font-family:monospace; box-shadow:inset 0 0 15px rgba(0,0,0,.8); }
+        .cu-display-screen span { font-size:11px; letter-spacing:1px; }
+        .cu-display-screen strong { font-size:25px; letter-spacing:2px; }
+        .cu-display-screen small { font-size:9px; color:#c9d0d5; letter-spacing:.5px; }
+        .cu-panel { background:#b7bcc1; border:1px solid #858b91; border-radius:5px; padding:12px; display:flex; flex-direction:column; justify-content:center; gap:10px; }
+        .cu-key-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+        .cu-key-row button { height:42px; border:1px solid #777e85; border-radius:4px; background:linear-gradient(#f7f7f7,#cfd3d6); color:#1b2229; font-size:10px; font-weight:900; letter-spacing:.6px; box-shadow:0 2px 0 #8b9298; }
+        .cu-key-row button:active { transform:translateY(1px); box-shadow:0 1px 0 #8b9298; }
+        .cu-seal-row { background:#252d35; color:#c9d0d5; padding:8px 12px; display:flex; justify-content:space-between; font-size:8px; font-weight:800; letter-spacing:.7px; }
+        .party-symbol-box { width:65px; height:50px; background:#fff; }
+        .party-symbol-img { display:block !important; visibility:visible !important; opacity:1 !important; }
+        @media(max-width:700px) {
+            .control-unit-wrap { grid-column:1; }
+            .control-unit-card { width:100%; }
+            .cu-body { grid-template-columns:1fr; }
+            .cu-seal-row { flex-direction:column; gap:4px; }
+        }
+
+</style>
+
+<style>
+.form-login-overlay{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(4px);
+}
+.form-login-overlay.show{display:flex;}
+.form-login-modal{
+    position:relative;
+    width:min(430px,100%);
+    background:#fff;
+    color:#172033;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 25px 70px rgba(0,0,0,.35);
+    animation:formModalIn .18s ease-out;
+}
+@keyframes formModalIn{
+    from{opacity:0;transform:translateY(10px) scale(.98)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+.form-login-close{
+    position:absolute;
+    top:10px;
+    right:12px;
+    border:0;
+    background:transparent;
+    font-size:28px;
+    cursor:pointer;
+    color:#555;
+    line-height:1;
+}
+.form-login-icon{text-align:center;font-size:34px;margin-bottom:6px;}
+.form-login-modal h2{text-align:center;margin:0 0 8px;}
+.form-login-modal p{text-align:center;color:#667085;margin:0 0 22px;line-height:1.5;}
+.form-login-modal label{display:block;font-weight:600;margin:13px 0 7px;}
+.form-login-modal input{
+    width:100%;
+    box-sizing:border-box;
+    padding:12px 13px;
+    border:1px solid #ccd2da;
+    border-radius:9px;
+    font-size:15px;
+    outline:none;
+}
+.form-login-modal input:focus{border-color:#16803c;box-shadow:0 0 0 3px rgba(22,128,60,.12);}
+.login-continue-btn,.login-cancel-btn{
+    width:100%;
+    padding:12px;
+    border-radius:9px;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+}
+.login-continue-btn{
+    margin-top:18px;
+    border:0;
+    background:#138a3d;
+    color:#fff;
+}
+.login-cancel-btn{
+    margin-top:9px;
+    border:1px solid #d0d5dd;
+    background:#fff;
+    color:#344054;
+}
+.login-error{
+    display:none;
+    margin-top:10px;
+    padding:9px 10px;
+    border-radius:8px;
+    background:#fff0f0;
+    color:#b42318;
+    font-size:13px;
+}
+.demo-login-note{
+    margin-top:16px;
+    padding:10px 12px;
+    border-radius:9px;
+    background:#f5f7fa;
+    color:#667085;
+    font-size:12px;
+    line-height:1.45;
+}
+.application-status{
+    position:fixed;
+    left:50%;
+    bottom:24px;
+    transform:translateX(-50%);
+    z-index:100000;
+    display:none;
+    padding:12px 18px;
+    border-radius:10px;
+    background:#172033;
+    color:#fff;
+    box-shadow:0 8px 30px rgba(0,0,0,.25);
+}
+
+/* FUNCTIONAL CONTROL UNIT OVERRIDES */
+.cu-lock-state{display:flex;align-items:center;justify-content:center;gap:7px;background:#20272e;color:#dbe1e5;border-radius:4px;padding:7px 5px;font-size:8px;font-weight:900;letter-spacing:.8px;}
+#cu-lock-dot{width:8px;height:8px;border-radius:50%;background:#28b85a;box-shadow:0 0 7px rgba(40,184,90,.8);}
+.cu-key-row button{cursor:pointer!important;}
+.cu-key-row button:disabled{opacity:.45;cursor:not-allowed!important;}
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+<div class="topbar">
+        <div class="logo">
+            <div class="eci-top-left" title="Election Commission of India" aria-label="Election Commission of India logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Election_Commission_of_India_Logo.svg/200px-Election_Commission_of_India_Logo.svg.png" alt="Official Election Commission of India logo" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Election_Commission_of_India_Logo.svg/500px-Election_Commission_of_India_Logo.svg.png';">
+            </div>
+            <div>
+                <h1>Voter Awareness Portal of India</h1>
+                <p>Know Your Vote • Know Your Rights</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#guide">Guide</a>
+            <a href="#about">About</a>
+            <a href="https://voters.eci.gov.in/login" target="_blank" rel="noopener noreferrer" style="color: #138808; border: 1px solid #138808; padding: 5px 10px; border-radius: 5px;">Official ECI Login ↗</a>
+        </nav>
+    </div>
+    <div class="flag"></div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <div class="ashoka-emblem" aria-label="Ashoka emblem"></div>
+        <h2>Your Vote. Your Voice. Your Democracy.</h2>
+        <p>
+            Learn how to register as a voter, update your electoral
+            information, understand your voting rights and participate
+            responsibly in India's democratic process.
+        </p>
+        <a class="btn" href="https://voters.eci.gov.in/?src=android" target="_blank" rel="noopener noreferrer">Official Voter Services</a>
+        <a class="btn green" href="#guide">Learn How to Vote</a>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <h2 class="section-title">Why Voter Awareness Matters</h2>
+    <p class="section-description">
+        A healthy democracy depends on informed citizens.
+        Understanding voter registration, electoral rolls and
+        voting procedures helps citizens participate effectively
+        in elections.
+    </p>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-icon">🗳️</div>
+            <h3>Know Your Vote</h3>
+            <p>Understand the importance of your vote and participate responsibly in elections.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">📋</div>
+            <h3>Electoral Roll</h3>
+            <p>Learn about voter registration and checking your electoral-roll information.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🔐</div>
+            <h3>Verify Information</h3>
+            <p>Keep your voter information accurate and up to date.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🇮🇳</div>
+            <h3>Responsible Citizen</h3>
+            <p>Make informed decisions and respect the democratic process.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONSTITUTION & VOTING RIGHTS -->
+<section class="constitution-section" id="constitution">
+    <div class="guide-head">
+        <span class="eyebrow">CONSTITUTION &amp; DEMOCRACY</span>
+        <h2 class="section-title">Constitution and Your Voting Right</h2>
+        <p class="section-description">
+            India's Constitution provides the framework for elections and voter registration.
+            Article 326 establishes elections to the House of the People and State Legislative Assemblies
+            on the basis of adult suffrage, subject to constitutional and legal qualifications.
+        </p>
+    </div>
+    <div class="constitution-grid">
+        <div class="constitution-image-card">
+            <div class="constitution-image-wrap">
+                <img class="constitution-image"
+                     src="https://commons.wikimedia.org/wiki/Special:FilePath/Constitution%20of%20India.jpg?width=900"
+                     alt="Preamble of the Constitution of India" loading="lazy">
+            </div>
+            <div class="image-caption">Constitution of India — Preamble. Source: Wikimedia Commons.</div>
+        </div>
+        <div class="rights-card">
+            <span class="rights-kicker">ARTICLES 325–326</span>
+            <h3>The constitutional basis of voting</h3>
+            <div class="article-highlight">
+                <div class="article-number">Article 326 — Adult Suffrage</div>
+                <p>
+                    Elections to the House of the People and to the Legislative Assembly of every State
+                    are based on adult suffrage. A citizen who is at least 18 years old may be entitled
+                    to be registered as a voter, subject to the qualifications and disqualifications
+                    provided by the Constitution and applicable law.
+                </p>
+            </div>
+            <div class="rights-points">
+                <div class="rights-point"><span>18</span><p><strong>Minimum age:</strong> Adult suffrage applies from 18 years, subject to applicable law.</p></div>
+                <div class="rights-point"><span>1</span><p><strong>General electoral roll:</strong> Article 325 provides for one general electoral roll for each territorial constituency and bars exclusion from a special electoral roll solely on specified grounds such as religion, race, caste or sex.</p></div>
+                <div class="rights-point"><span>✓</span><p><strong>Registration matters:</strong> Eligible citizens need to be registered in the electoral roll to vote in an election.</p></div>
+                <div class="rights-point"><span>!</span><p><strong>Stay informed:</strong> Check official election information and electoral-roll details through authorised sources.</p></div>
+            </div>
+            <a class="mini-btn" href="https://www.indiacode.nic.in/bitstream/123456789/19632/1/the_constitution_of_india.pdf" target="_blank" rel="noopener noreferrer">Read the Constitution PDF ↗</a>
+        </div>
+    </div>
+</section>
+
+<!-- COMPREHENSIVE SERVICES -->
+<section class="services" id="services">
+    <div class="guide-head">
+        <span class="eyebrow">COMPREHENSIVE SERVICES</span>
+        <h2 class="section-title">Voter Portal Services & Forms</h2>
+        <p class="section-description">Navigate the Election Commission of India's official services. Know exactly which form to fill out for your specific needs and gather the right documents before applying.</p>
+    </div>
+
+    <div class="service-container">
+        <div class="form-grid">
+            
+            <!-- FORM 6 -->
+            <div class="form-card">
+                <div class="form-badge green">FORM 6</div>
+                <div class="card-icon" style="font-size:32px; margin-bottom:5px;">📝</div>
+                <h3>New Voter Registration</h3>
+                <p>For first-time voters turning 18, or citizens who have never registered to vote in India before.</p>
+                <ul class="form-features">
+                    <li>Register as a general elector</li>
+                    <li>Add your name to the electoral roll</li>
+                    <li>First-time EPIC (Voter ID) generation</li>
+                </ul>
+                <a class="btn green" href="https://voters.eci.gov.in/form6" onclick="return openFormLogin(\'Form 6\', \'https://voters.eci.gov.in/form6\');">Apply Form 6</a>
+            </div>
+            
+            <!-- FORM 8 -->
+            <div class="form-card">
+                <div class="form-badge orange">FORM 8</div>
+                <div class="card-icon" style="font-size:32px; margin-bottom:5px;">✏️</div>
+                <h3>Update / Shift / Correction</h3>
+                <p>For existing voters who need to change details, shift address, or request a replacement ID.</p>
+                <ul class="form-features">
+                    <li>Shift of residence (within or outside constituency)</li>
+                    <li>Correction of entries (Name, DOB, Relation)</li>
+                    <li>Issue of Replacement EPIC without change</li>
+                </ul>
+                <a class="btn" href="https://voters.eci.gov.in/form8" onclick="return openFormLogin(\'Form 8\', \'https://voters.eci.gov.in/form8\');">Apply Form 8</a>
+            </div>
+
+            <!-- FORM 7 -->
+            <div class="form-card">
+                <div class="form-badge" style="background:#d32f2f;">FORM 7</div>
+                <div class="card-icon" style="font-size:32px; margin-bottom:5px;">🗑️</div>
+                <h3>Deletion / Objection</h3>
+                <p>To object to a proposed inclusion or seek deletion of an existing name from the electoral roll.</p>
+                <ul class="form-features">
+                    <li>Death of an existing elector</li>
+                    <li>Permanently shifted to a different location</li>
+                    <li>Duplicate entry removal</li>
+                </ul>
+                <a class="btn red" href="https://voters.eci.gov.in/form7" onclick="return openFormLogin(\'Form 7\', \'https://voters.eci.gov.in/form7\');">Apply Form 7</a>
+            </div>
+
+            <!-- FORM 6A -->
+            <div class="form-card">
+                <div class="form-badge">FORM 6A</div>
+                <div class="card-icon" style="font-size:32px; margin-bottom:5px;">✈️</div>
+                <h3>NRI Elector Registration</h3>
+                <p>For Non-Resident Indians holding an Indian passport who wish to register as overseas voters.</p>
+                <ul class="form-features">
+                    <li>Register as an overseas elector</li>
+                    <li>Requires valid Indian passport</li>
+                    <li>Must vote in-person in home constituency</li>
+                </ul>
+                <a class="btn blue" href="https://voters.eci.gov.in/form6A" onclick="return openFormLogin(\'Form 6A\', \'https://voters.eci.gov.in/form6A\');">Apply Form 6A</a>
+            </div>
+        </div>
+
+        <!-- DOCUMENT REQUIREMENTS -->
+        <div class="doc-req">
+            <h3 style="text-align: center; color: #1b3c73; margin-bottom: 10px; font-size: 24px;">📋 Standard Required Documents</h3>
+            <p style="text-align: center; color: #667085; max-width: 600px; margin: 0 auto;">Keep scanned copies of these documents ready (max 2MB, JPG/PNG/PDF format) before you start your online application.</p>
+            
+            <div class="doc-grid">
+                <div class="doc-box">
+                    <h4>1. Passport Size Photo</h4>
+                    <p>A recent color photograph with a clear, plain white background showing your full face directly looking at the camera.</p>
+                </div>
+                <div class="doc-box">
+                    <h4>2. Proof of Age</h4>
+                    <p>Aadhaar Card, PAN Card, Birth Certificate issued by municipal authorities, Driving License, or Class 10/12 Marksheet.</p>
+                </div>
+                <div class="doc-box">
+                    <h4>3. Proof of Residence</h4>
+                    <p>Aadhaar Card, Current Utility Bill (Water/Electricity/Gas), Indian Passport, Registered Rent Agreement, or Bank Passbook.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ENHANCED VOTER GUIDE -->
+<section id="guide" class="enhanced-guide">
+    <div class="guide-head">
+        <span class="eyebrow">INTERACTIVE VOTER GUIDE</span>
+        <h2 class="section-title">Learn How to Vote — From Preparation to Polling Booth</h2>
+        <p class="section-description">
+            Go beyond the basics. Understand what to check before election day,
+            what happens at the polling station, how EVM & VVPAT work, and how
+            to make your participation informed and responsible.
+        </p>
+    </div>
+
+    <div class="guide-tabs" role="tablist">
+        <button class="guide-tab active" onclick="showGuide('before', this)">01 • Before Election Day</button>
+        <button class="guide-tab" onclick="showGuide('booth', this)">02 • At the Polling Station</button>
+        <button class="guide-tab" onclick="showGuide('evm', this)">03 • EVM & VVPAT</button>
+        <button class="guide-tab" onclick="showGuide('after', this)">04 • After Voting</button>
+    </div>
+
+    <div id="before" class="guide-panel active-panel">
+        <div class="journey-grid">
+            <div class="journey-card">
+                <div class="journey-icon">🔎</div>
+                <h3>1. Check your electoral roll</h3>
+                <p>Confirm that your name and voter details are present in the electoral roll before election day.</p>
+                <a class="mini-btn" href="https://electoralsearch.eci.gov.in/" target="_blank" rel="noopener noreferrer">Search Electoral Roll ↗</a>
+            </div>
+            <div class="journey-card">
+                <div class="journey-icon">📍</div>
+                <h3>2. Know your polling station</h3>
+                <p>Find your assigned polling station and plan your route before election day.</p>
+            </div>
+            <div class="journey-card">
+                <div class="journey-icon">🪪</div>
+                <h3>3. Keep identification ready</h3>
+                <p>Carry the identification/document accepted for the election as specified by election authorities.</p>
+            </div>
+            <div class="journey-card">
+                <div class="journey-icon">📢</div>
+                <h3>4. Verify election information</h3>
+                <p>Use official sources for polling dates, candidates, polling-station information and updates.</p>
+            </div>
+        </div>
+
+        <div class="checklist-box">
+            <div>
+                <span class="checklist-label">ELECTION DAY CHECKLIST</span>
+                <h3>Before leaving home</h3>
+            </div>
+            <div class="check-items">
+                <label><input type="checkbox"> My name is on the electoral roll</label>
+                <label><input type="checkbox"> I know my polling station</label>
+                <label><input type="checkbox"> I have the required identification</label>
+                <label><input type="checkbox"> I have checked official election information</label>
+            </div>
+        </div>
+    </div>
+
+    <div id="booth" class="guide-panel">
+        <div class="booth-flow">
+            <div class="flow-step"><span>01</span><div><h3>Reach your polling station</h3><p>Go to the polling station assigned to you and follow election officials' instructions.</p></div></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step"><span>02</span><div><h3>Verification</h3><p>Your identity and electoral-roll entry are checked according to the applicable procedure.</p></div></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step"><span>03</span><div><h3>Proceed to the voting compartment</h3><p>Follow polling staff instructions and maintain the secrecy of your vote.</p></div></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step highlight"><span>04</span><div><h3>Make your choice on the EVM</h3><p>Select the candidate of your choice as displayed on the ballot unit. Your vote is confidential.</p></div></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step"><span>05</span><div><h3>Observe the VVPAT verification</h3><p>The VVPAT system provides a paper-slip verification of the vote for a short period.</p></div></div>
+        </div>
+        <div class="info-strip"><strong>🔒 Remember:</strong> Do not photograph or disclose your vote. Follow the instructions displayed at the polling station.</div>
+    </div>
+
+    <div id="evm" class="guide-panel">
+        <div class="evm-layout">
+            
+            <!-- REALISTIC BALLOT UNIT -->
+            <div class="evm-card">
+                <div class="evm-title"><span class="status-dot"></span> BALLOT UNIT</div>
+                <div class="evm-machine">
+                    <div class="machine-label">
+                        <span>SL. NO & CANDIDATE</span>
+                        <span>SYMBOL & VOTE</span>
+                    </div>
+                    
+                    <!-- Candidate 1: Narendra Modi (Lotus) -->
+                    <div class="candidate-row">
+                        <span class="serial-no">1</span>
+                        <span class="candidate-name">Narendra Modi</span>
+                        <span class="party-symbol-box">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lotus%20flower%20symbol.svg" alt="BJP Lotus election symbol" class="party-symbol-img" id="symbol-img-1" loading="lazy">
+                        </span>
+                        <div class="evm-controls">
+                            <div class="evm-led" id="led-1"></div>
+                            <button class="evm-btn" onclick="voteDemo(1)"></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Candidate 2: Rahul Gandhi (Hand) -->
+                    <div class="candidate-row">
+                        <span class="serial-no">2</span>
+                        <span class="candidate-name">Rahul Gandhi</span>
+                        <span class="party-symbol-box">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Indian%20National%20Congress%20hand%20logo.svg" alt="Indian National Congress Hand election symbol" class="party-symbol-img" id="symbol-img-2" loading="lazy">
+                        </span>
+                        <div class="evm-controls">
+                            <div class="evm-led" id="led-2"></div>
+                            <button class="evm-btn" onclick="voteDemo(2)"></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Candidate 3: Asaduddin Owaisi (Kite) -->
+                    <div class="candidate-row">
+                        <span class="serial-no">3</span>
+                        <span class="candidate-name">Asaduddin Owaisi</span>
+                        <span class="party-symbol-box">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Indian%20Election%20Symbol%20Kite.svg" alt="AIMIM Kite election symbol" class="party-symbol-img" id="symbol-img-3" loading="lazy">
+                        </span>
+                        <div class="evm-controls">
+                            <div class="evm-led" id="led-3"></div>
+                            <button class="evm-btn" onclick="voteDemo(3)"></button>
+                        </div>
+                    </div>
+
+                    <!-- Candidate 4: Akhilesh Yadav (Bicycle) -->
+                    <div class="candidate-row">
+                        <span class="serial-no">4</span>
+                        <span class="candidate-name">Akhilesh Yadav</span>
+                        <span class="party-symbol-box">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Samajwadi%20Party.png" alt="Samajwadi Party Bicycle symbol" class="party-symbol-img" id="symbol-img-4" loading="lazy">
+                        </span>
+                        <div class="evm-controls">
+                            <div class="evm-led" id="led-4"></div>
+                            <button class="evm-btn" onclick="voteDemo(4)"></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Candidate 5: NOTA -->
+                    <div class="candidate-row" style="background: #fdf5f5;">
+                        <span class="serial-no">5</span>
+                        <span class="candidate-name">NOTA</span>
+                        <span class="party-symbol-box">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22white%22%2F%3E%3Crect%20x%3D%2218%22%20y%3D%2218%22%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%225%22%20fill%3D%22%23777%22%20stroke%3D%22%23333%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2257%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2224%22%20font-weight%3D%22800%22%20fill%3D%22white%22%3ENOTA%3C%2Ftext%3E%3C%2Fsvg%3E" alt="NOTA Symbol" class="party-symbol-img" id="symbol-img-5" loading="lazy">
+                        </span>
+                        <div class="evm-controls">
+                            <div class="evm-led" id="led-5"></div>
+                            <button class="evm-btn" onclick="voteDemo(5)"></button>
+                        </div>
+                    </div>
+                </div>
+                <p class="demo-note">Ensure your volume is up. Press the blue button and listen for the confirmation beep.</p>
+            </div>
+            
+            <!-- VVPAT MACHINE -->
+            <div class="evm-card">
+                <div class="evm-title"><span class="status-dot" style="background:#ff9933"></span> VVPAT</div>
+                <div class="vvpat-machine">
+                    <div style="color:#a8b6cc; font-size:11px; font-weight:800; margin-bottom:5px;">TRANSPARENT PRINTER WINDOW</div>
+                    <div class="vvpat-window">
+                        <!-- VVPAT SLIP: ONLY SHOWS ELECTION SYMBOL, ZERO TEXT -->
+                        <div id="vvpat-slip" class="vvpat-slip">
+                            <img src="" alt="VVPAT Verification Symbol" id="slip-symbol-image" class="slip-symbol-img" style="display:none;">
+                        </div>
+                    </div>
+                </div>
+                <p class="demo-note">The VVPAT prints a black-and-white thermal slip showing your verified symbol behind the glass for exactly 7 seconds before dropping.</p>
+            </div>
+        </div>
+
+<!-- THIRD UNIT: CONTROL UNIT — CENTERED BELOW BALLOT UNIT & VVPAT -->
+        <div class="control-unit-wrap">
+            <div class="evm-card control-unit-card">
+                <div class="evm-title"><span class="status-dot"></span> CONTROL UNIT</div>
+                <div class="real-control-unit">
+                    <div class="cu-header">
+                        <div class="cu-brand">ELECTRONIC VOTING SYSTEM<small>CONTROL UNIT • SECURE ELECTION HARDWARE</small></div>
+                        <div class="cu-indicators">
+                            <span><i class="cu-green"></i>POWER</span>
+                            <span><i class="cu-red"></i>STATUS</span>
+                        </div>
+                    </div>
+                    <div class="cu-body">
+                        <div class="cu-display">
+                            <div class="cu-display-label">CONTROL UNIT</div>
+                            <div class="cu-display-screen">
+                                <span id="cu-display-status">UNIT READY</span>
+                                <strong id="cu-vote-count">VOTE : 000</strong>
+                                <small id="cu-display-hint">PRESS BALLOT TO ENABLE</small>
+                            </div>
+                        </div>
+                        <div class="cu-panel">
+                            <div class="cu-panel-title">CONTROL KEYS</div>
+                            <div class="cu-key-row"><button class="primary" onclick="cuBallot()">BALLOT</button><button onclick="cuClose()">CLOSE</button></div>
+                            <div class="cu-key-row"><button onclick="cuTotal()">TOTAL</button><button onclick="cuResult()">RESULT</button></div>
+                            <div class="cu-lock-state"><span id="cu-lock-dot"></span><span id="cu-lock-text">BALLOT ENABLED</span></div>
+                        </div>
+                    </div>
+                    <div class="cu-bottom-panel">
+                        <span>POWER / BATTERY STATUS</span><div class="cu-lock">🔒</div><span style="text-align:right">SECURITY SEAL • UNIT READY</span>
+                    </div>
+                    <div class="cu-seal-row">
+                        <span>SECURED CONTROL UNIT</span>
+                        <span>VOTING DATA RECORDED ELECTRONICALLY</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="concept-grid">
+            <div class="concept-card"><b>🗳️ Electronic Voting Machine (EVM)</b><p>The blue button records your vote electronically. The red light confirms your button press, and a long beep sounds until the process finishes.</p></div>
+            <div class="concept-card"><b>🧾 VVPAT Verification</b><p>The Voter Verifiable Paper Audit Trail allows you to visually verify the symbol you selected inside the viewing window.</p></div>
+        </div>
+    </div>
+
+    <div id="after" class="guide-panel">
+        <div class="after-grid">
+            <div class="after-card"><span class="big-icon">✅</span><h3>Vote completed</h3><p>After completing the polling procedure, leave the polling station area as directed by officials.</p></div>
+            <div class="after-card"><span class="big-icon">🛡️</span><h3>Protect your privacy</h3><p>Never share private voting information, OTPs, passwords or sensitive details with unknown people or websites.</p></div>
+            <div class="after-card"><span class="big-icon">📰</span><h3>Check official updates</h3><p>For election results, notices and announcements, rely on authorised Election Commission sources.</p></div>
+        </div>
+        <div class="myth-box">
+            <div class="myth-title">MYTH CHECK</div>
+            <div class="myth-row"><span class="myth-tag">MYTH</span><p>“A voter must vote for the candidate someone else tells them to choose.”</p></div>
+            <div class="myth-row"><span class="fact-tag">FACT</span><p>Your vote is your own choice. Make an informed decision and keep your voting choice private.</p></div>
+        </div>
+    </div>
+
+    <div class="quick-knowledge">
+        <div class="quick-title">QUICK KNOWLEDGE CHECK</div>
+        <h3>Which source should you trust first for official voter-service information?</h3>
+        <div class="quiz-options">
+            <button onclick="quizAnswer(this, false)">A random social-media post</button>
+            <button onclick="quizAnswer(this, true)">Official Election Commission / voter-services sources</button>
+            <button onclick="quizAnswer(this, false)">An unknown forwarded message</button>
+        </div>
+        <div id="quiz-result" class="quiz-result"></div>
+    </div>
+
+    <div class="notice">
+        <strong>⚠️ Important:</strong>
+        This website is an educational voter-awareness project. It is not affiliated with
+        or operated by the Election Commission of India. For current election rules,
+        dates, documents and procedures, always verify information through official sources.
+    </div>
+</section>
+
+<!-- VOTING TIPS -->
+<section>
+    <h2 class="section-title">Responsible Voting</h2>
+    <div class="cards">
+        <div class="card">
+            <div class="card-icon">📚</div>
+            <h3>Stay Informed</h3>
+            <p>Check reliable and official information before making electoral decisions.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🚫</div>
+            <h3>Reject Misinformation</h3>
+            <p>Verify election-related claims before sharing them with others.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🤝</div>
+            <h3>Respect Others</h3>
+            <p>Respect different opinions and participate peacefully in the democratic process.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🇮🇳</div>
+            <h3>Participate</h3>
+            <p>Encourage eligible citizens to learn about the electoral process.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- FORM LOGIN MODAL -->
+<div id="formLoginOverlay" class="form-login-overlay" aria-hidden="true">
+    <div class="form-login-modal" role="dialog" aria-modal="true" aria-labelledby="formLoginTitle">
+        <button type="button" class="form-login-close" onclick="closeFormLogin()" aria-label="Close">×</button>
+        <div class="form-login-icon">🔐</div>
+        <h2 id="formLoginTitle">Login to Apply</h2>
+        <p id="formLoginSubtitle">Login first, then continue to the selected application page.</p>
+
+        <form onsubmit="submitFormLogin(event)">
+            <label for="loginMobile">Mobile Number</label>
+            <input id="loginMobile" type="tel" inputmode="numeric" maxlength="10"
+                   placeholder="Enter 10-digit mobile number" autocomplete="tel" required>
+
+            <label for="loginPassword">Password</label>
+            <input id="loginPassword" type="password"
+                   placeholder="Enter password" autocomplete="current-password" required>
+
+            <div id="loginError" class="login-error"></div>
+
+            <button type="submit" class="login-continue-btn">Login & Continue</button>
+            <button type="button" class="login-cancel-btn" onclick="closeFormLogin()">Cancel</button>
+        </form>
+
+        <div class="demo-login-note">
+            Demo login for this educational website. Do not enter your real ECI password or OTP.
+            Authentication is handled by the official ECI website after you continue.
+        </div>
+    </div>
+</div>
+
+<div id="applicationStatus" class="application-status" role="status"></div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <h3>Voter Awareness Portal of India</h3>
+            <p>An educational project designed to promote awareness about electoral participation.</p>
+        </div>
+        <div>
+            <h3>Official Resources</h3>
+            <p><a href="https://eci.gov.in/" target="_blank" rel="noopener noreferrer">Election Commission of India</a></p>
+            <p><a href="https://voters.eci.gov.in/?src=android" target="_blank" rel="noopener noreferrer">Voter Services Portal</a></p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <p><a href="#home">Home</a></p>
+            <p><a href="#services">Services</a></p>
+            <p><a href="#guide">Voter Guide</a></p>
+            <p><a href="#about">About</a></p>
+        </div>
+    </div>
+    <div class="copyright">
+        © 2026 Voter Awareness Portal of India | Educational Project
+    </div>
+</footer>
+
+<script>
+// Initialize Web Audio Context for Authentic EVM Beep Sound
+let audioCtx;
+
+function initAudio() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+}
+
+function playEVMBeep() {
+    initAudio();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    // EVM uses a high-pitched, continuous beep
+    oscillator.type = 'square'; 
+    oscillator.frequency.setValueAtTime(2300, audioCtx.currentTime); // High pitch frequency
+    
+    // Smooth volume control to prevent clicking sounds
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 0.05); // low volume
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    oscillator.start();
+    
+    // The beep lasts exactly 7 seconds while the slip prints and drops
+    gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime + 7.3);
+    gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 7.4);
+    oscillator.stop(audioCtx.currentTime + 7.5);
+}
+
+function showGuide(id, button) {
+    document.querySelectorAll('.guide-panel').forEach(panel => panel.classList.remove('active-panel'));
+    document.getElementById(id).classList.add('active-panel');
+    document.querySelectorAll('.guide-tab').forEach(tab => tab.classList.remove('active'));
+    button.classList.add('active');
+}
+
+let cuTotalVotes=0;
+let cuClosed=false;
+let cuBallotReady=true;
+const cuResults={1:0,2:0,3:0,4:0,5:0};
+
+function cuUpdateDisplay(status,hint){
+  const a=document.getElementById('cu-display-status'),b=document.getElementById('cu-vote-count'),c=document.getElementById('cu-display-hint');
+  if(a)a.textContent=status; if(b)b.textContent='VOTE : '+String(cuTotalVotes).padStart(3,'0'); if(c)c.textContent=hint;
+}
+function cuBallot(){
+  if(cuClosed){cuUpdateDisplay('POLL CLOSED','RESULT BUTTON TO VIEW TOTALS');return;}
+  cuBallotReady=true; document.querySelectorAll('.evm-btn').forEach(b=>b.disabled=false);
+  document.getElementById('cu-lock-text').textContent='BALLOT ENABLED'; document.getElementById('cu-lock-dot').style.background='#28b85a';
+  cuUpdateDisplay('BALLOT READY','SELECT A CANDIDATE ON BALLOT UNIT');
+}
+function cuClose(){
+  cuClosed=true; cuBallotReady=false; document.querySelectorAll('.evm-btn').forEach(b=>b.disabled=true);
+  document.getElementById('cu-lock-text').textContent='POLL CLOSED'; document.getElementById('cu-lock-dot').style.background='#c93636';
+  cuUpdateDisplay('POLL CLOSED','RESULT BUTTON TO VIEW TOTALS');
+}
+function cuTotal(){cuUpdateDisplay('TOTAL VOTES',String(cuTotalVotes).padStart(3,'0')+' VOTES RECORDED');}
+function cuResult(){
+  if(!cuClosed){cuUpdateDisplay('RESULT LOCKED','CLOSE POLL BEFORE RESULT');return;}
+  let lead=1; Object.keys(cuResults).forEach(k=>{if(cuResults[k]>cuResults[lead])lead=Number(k);});
+  cuUpdateDisplay('RESULTS READY','TOTAL '+String(cuTotalVotes).padStart(3,'0')+' • LEADER CANDIDATE '+lead);
+}
+
+function voteDemo(serialNo) {
+    if(cuClosed || !cuBallotReady) return;
+    cuTotalVotes++; cuResults[serialNo]++; cuBallotReady=false;
+    cuUpdateDisplay('VOTE RECORDED','VVPAT VERIFICATION IN PROGRESS');
+    // Disable buttons during cycle
+    const buttons = document.querySelectorAll('.evm-btn');
+    buttons.forEach(btn => btn.disabled = true);
+    
+    // Turn on the specific Red LED for selected candidate
+    const activeLed = document.getElementById('led-' + serialNo);
+    activeLed.classList.add('on');
+    
+    // Trigger Authentic Beep Sound
+    playEVMBeep();
+    
+    // Retrieve the exact image source from the selected candidate's row
+    const symbolImgSrc = document.getElementById('symbol-img-' + serialNo).src;
+    const slipSymbolImage = document.getElementById('slip-symbol-image');
+    
+    // Display only the image in the VVPAT slip
+    slipSymbolImage.src = symbolImgSrc;
+    slipSymbolImage.style.display = 'block';
+    
+    const slip = document.getElementById('vvpat-slip');
+    slip.className = 'vvpat-slip';
+    
+    // Slight delay before printing slip
+    setTimeout(() => {
+        slip.classList.add('printing');
+        
+        // Show for 7 seconds, then drop (synced with beep)
+        setTimeout(() => {
+            slip.classList.remove('printing');
+            slip.classList.add('dropping');
+            activeLed.classList.remove('on');
+            
+            setTimeout(() => {
+                cuBallotReady=false;
+                buttons.forEach(btn => btn.disabled = cuClosed);
+                cuUpdateDisplay(cuClosed?'POLL CLOSED':'PRESS BALLOT',cuClosed?'RESULT BUTTON TO VIEW TOTALS':'PRESS BALLOT TO ENABLE NEXT VOTE');
+                slip.className = 'vvpat-slip';
+                slipSymbolImage.style.display = 'none'; // Clear the slip visually once dropped
+            }, 600);
+            
+        }, 7000);
+        
+    }, 400);
+}
+
+
+// FORM LOGIN -> APPLICATION FLOW
+let selectedFormUrl = '';
+let selectedFormName = '';
+
+function openFormLogin(formName, formUrl) {
+    selectedFormName = formName;
+    selectedFormUrl = formUrl;
+
+    const overlay = document.getElementById('formLoginOverlay');
+    if (!overlay) {
+        window.location.href = formUrl;
+        return false;
+    }
+
+    document.getElementById('formLoginTitle').textContent = 'Login to Apply — ' + formName;
+    document.getElementById('formLoginSubtitle').textContent =
+        'Login first, then continue to the ' + formName + ' application page.';
+    document.getElementById('loginMobile').value = '';
+    document.getElementById('loginPassword').value = '';
+    document.getElementById('loginError').style.display = 'none';
+
+    overlay.classList.add('show');
+    overlay.setAttribute('aria-hidden', 'false');
+    setTimeout(() => document.getElementById('loginMobile').focus(), 100);
+    return false;
+}
+
+function closeFormLogin() {
+    const overlay = document.getElementById('formLoginOverlay');
+    if (!overlay) return;
+    overlay.classList.remove('show');
+    overlay.setAttribute('aria-hidden', 'true');
+}
+
+function submitFormLogin(event) {
+    event.preventDefault();
+
+    const mobile = document.getElementById('loginMobile').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const error = document.getElementById('loginError');
+
+    if (!/^\d{10}$/.test(mobile)) {
+        error.textContent = 'Please enter a valid 10-digit mobile number.';
+        error.style.display = 'block';
+        return;
+    }
+
+    if (!password) {
+        error.textContent = 'Please enter your password.';
+        error.style.display = 'block';
+        return;
+    }
+
+    // Demo login only: no real credentials are stored or transmitted.
+    closeFormLogin();
+
+    const status = document.getElementById('applicationStatus');
+    status.textContent = 'Login successful. Opening ' + selectedFormName + ' application…';
+    status.style.display = 'block';
+
+    setTimeout(() => {
+        status.style.display = 'none';
+        window.location.href = selectedFormUrl;
+    }, 900);
+}
+
+const formLoginOverlay = document.getElementById('formLoginOverlay');
+if (formLoginOverlay) {
+    formLoginOverlay.addEventListener('click', function(e) {
+        if (e.target === this) closeFormLogin();
+    });
+}
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeFormLogin();
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeFormLogin();
+});
+
+function quizAnswer(button, correct) {
+    const result = document.getElementById('quiz-result');
+    result.textContent = correct
+        ? '✓ Correct — prefer official Election Commission and voter-services sources.'
+        : 'Try again — verify election information through official sources.';
+    result.style.color = correct ? '#138808' : '#b42318';
+}
+</script>
+
+</body>
+</html>
